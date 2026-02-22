@@ -1,8 +1,9 @@
 \# Real-Time Video Analytics Platform
 
+Deployed a real-time computer vision analytics platform on AWS using EC2, Docker, Kafka, and Streamlit with low-latency inference and scalable streaming architecture.”
 
 
-A real-time video analytics system built using YOLOv8, Apache Kafka, Streamlit, and Docker to analyze live video streams for retail insights such as customer presence, movement heatmaps, and inference latency.
+Its built using YOLOv8, Apache Kafka, Streamlit, and Docker to analyze live video streams for retail insights such as customer presence, movement heatmaps, and inference latency.
 
 “The system follows a decoupled streaming architecture.
 YOLOv8 runs as a producer pushing inference metadata into Kafka.
