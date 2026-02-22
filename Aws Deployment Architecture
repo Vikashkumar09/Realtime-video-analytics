@@ -1,0 +1,52 @@
+The platform is deployed on AWS using a scalable, cloud-native architecture to support real-time video analytics with low latency and high availability.
+
+## ☁️ AWS Deployment
+
+The Real-Time Video Analytics Platform is deployed on AWS to enable scalable, low-latency processing of live video streams and analytics data.
+
+### 🔧 AWS Services Used
+- **EC2** – Hosts YOLOv8 producer, Kafka broker, and analytics consumers
+- **Docker** – Containerized Kafka, Zookeeper, and application services
+- **Elastic Load Balancer (optional)** – Load balancing for Streamlit dashboard
+- **Amazon S3** – Stores model weights, logs, and archived analytics data
+- **CloudWatch** – Monitoring logs, system metrics, and application health
+- **IAM** – Secure access control for EC2 and S3 resources
+
+#  AWS System Architecture Diagram
+
+### 🏗️ Cloud Architecture
+
+```mermaid
+flowchart LR
+    Cam[Camera / RTSP Stream] --> EC2P[EC2: YOLOv8 Producer]
+    EC2P --> Kafka[Kafka Broker on EC2]
+    Kafka --> EC2C[EC2: Analytics Consumer]
+    EC2C --> S3[S3: Metrics & Logs]
+    EC2C --> Dash[Streamlit Dashboard]
+    Dash --> User[Retail Analyst]
+
+ Deployment Workflow
+
+1. YOLOv8 inference runs on **EC2 instances** using live camera feeds
+2. Detection metadata (bounding boxes, timestamps) is streamed to **Kafka**
+3. Kafka consumers process messages to compute:
+   - Customer heatmaps
+   - Real-time inference latency
+4. Processed analytics are:
+   - Visualized in a **Streamlit dashboard**
+   - Persisted to **Amazon S3** for historical analysis
+5. System metrics and logs are monitored via **CloudWatch**
+
+#  Performance & Scalability
+
+- Achieved **~200ms end-to-end latency** for real-time inference
+- Kafka enables **horizontal scaling** by adding consumers
+- EC2 Auto Scaling allows dynamic workload handling
+- Decoupled producer–consumer design improves fault tolerance
+
+#  Security Considerations
+
+- IAM roles with least-privilege access
+- Kafka and EC2 secured via Security Groups
+- Private networking using VPC (optional production setup)
+- No credentials hard-coded in application
